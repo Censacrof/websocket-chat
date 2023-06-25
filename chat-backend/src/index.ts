@@ -1,7 +1,7 @@
 import { startExpress } from "./expressUtils";
 
 const port = 3000;
-const { app } = await startExpress({
+const { app, baseURL } = await startExpress({
   port,
 });
 
@@ -10,5 +10,5 @@ app.get("/", (_req, _res) => {
 });
 
 app.listen(port, () => {
-  console.log(`http://localhost:${port}/`);
+  console.log(`listening on ${baseURL}`);
 });
