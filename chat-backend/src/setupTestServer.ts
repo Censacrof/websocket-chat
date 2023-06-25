@@ -7,4 +7,8 @@ beforeEach(async () => {
   testServer = await startExpress();
 });
 
+afterAll(async () => {
+  await stopExpress(testServer.server);
+});
+
 export const getTestServer = () => testServer;
