@@ -44,4 +44,29 @@ describe("ColorModeSwitcher", () => {
       expect(screen.getByText(whichIcon)).toBeInTheDocument();
     }
   );
+
+  it.each`
+    colorMode
+    ${"light"}
+    ${"dark"}
+  `(
+    "toggles color mode on click",
+    async ({ colorMode }: { colorMode: ColorMode }) => {
+      const toggleColorMode = vi.fn();
+
+      const { user } = renderWithProviders(
+        <Sut
+          _useColorMode={() => ({
+            colorMode,
+            toggleColorMode,
+            setColorMode: vi.fn(),
+          })}
+        />
+      );
+
+      expect(toggleColorMode).toHaveBeenCalledTimes(0);
+      await user.click(screen.getByRole("button"));
+      expect(toggleColorMode).toHaveBeenCalledTimes(1);
+    }
+  );
 });

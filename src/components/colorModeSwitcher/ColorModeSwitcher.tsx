@@ -15,7 +15,7 @@ export const ColorModeSwitcher: FC<ColorModeSwitcherProps> = ({
   _MoonIcon = MoonIcon,
 }) => {
   const { t } = useTranslation();
-  const { colorMode } = _useColorMode();
+  const { colorMode, toggleColorMode } = _useColorMode();
 
   const label =
     colorMode === "light"
@@ -24,5 +24,7 @@ export const ColorModeSwitcher: FC<ColorModeSwitcherProps> = ({
 
   const Icon = colorMode === "light" ? _MoonIcon : _SunIcon;
 
-  return <IconButton aria-label={label} icon={<Icon />} />;
+  return (
+    <IconButton aria-label={label} icon={<Icon />} onClick={toggleColorMode} />
+  );
 };
