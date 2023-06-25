@@ -18,4 +18,10 @@ describe("Home", () => {
 
     expect(screen.getByText("a color mode switcher")).toBeInTheDocument();
   });
+
+  it("renders a chat", async () => {
+    renderWithProviders(<Sut _Chat={() => <>a chat</>} />);
+
+    expect(screen.getByText("a chat"));
+  });
 });
