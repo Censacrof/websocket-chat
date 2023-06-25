@@ -1,5 +1,10 @@
 import express, { Express } from "express";
-import { chatRoomRouterFactory } from "./chatRoomRouter";
+import { ChatRoomType } from "../model/chatRoom";
+import {
+  GetChatRoomResult,
+  GetChatRoomResultType,
+  chatRoomRouterFactory,
+} from "./chatRoomRouter";
 
 const startExpress = () => {
   const app = express();
@@ -19,7 +24,7 @@ const baseURL = new URL(`http://localhost:${port}`);
 
 describe("chatRoomRouter", async () => {
   it("returns the list of available chatRooms", async () => {
-    const chatRooms = [
+    const chatRooms: ChatRoomType[] = [
       {
         name: "A chat room",
       },
@@ -31,9 +36,8 @@ describe("chatRoomRouter", async () => {
     app.use("/", chatRoomRouterFactory(chatRooms));
 
     const res = await fetch(baseURL);
+    const data = GetChatRoomResult.check(await res.json());
 
-    const data = await res.json();
-
-    expect(data).toEqual(chatRooms);
+    expect(data).toEqual({ chatRooms } satisfies GetChatRoomResultType);
   });
 });
