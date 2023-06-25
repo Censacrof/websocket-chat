@@ -1,6 +1,6 @@
 import { startExpress } from "./expressUtils";
 
-const port = 3000;
+export const port = 3000;
 const { app, baseURL } = await startExpress({
   port,
 });
