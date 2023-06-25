@@ -1,8 +1,9 @@
-import express from "express";
-
-const app: express.Application = express();
+import { startExpress } from "./expressUtils";
 
 const port = 3000;
+const { app } = await startExpress({
+  port,
+});
 
 app.get("/", (_req, _res) => {
   _res.send("Hello world");

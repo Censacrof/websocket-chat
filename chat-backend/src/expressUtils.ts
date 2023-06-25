@@ -2,7 +2,11 @@ import express, { Express } from "express";
 import { IncomingMessage, Server, ServerResponse } from "http";
 import { AddressInfo } from "net";
 
-export const startExpress = () => {
+export interface StartExpressOptions {
+  port: number;
+}
+
+export const startExpress = (options?: StartExpressOptions) => {
   const app = express();
 
   return new Promise<{
@@ -12,7 +16,7 @@ export const startExpress = () => {
     baseURL: URL;
   }>((resolve, reject) => {
     const server = app
-      .listen(() => {
+      .listen(options?.port || 0, () => {
         const port = (server.address() as AddressInfo).port;
 
         const baseURL = new URL(`http://localhost:${port}`);
