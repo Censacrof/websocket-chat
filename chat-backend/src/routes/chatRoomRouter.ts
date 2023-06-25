@@ -29,8 +29,6 @@ export const chatRoomRouterFactory = (chatRooms: ChatRoomType[]) => {
     try {
       data = CreateChatRoomArgs.check(req.body);
     } catch (e) {
-      //
-      console.log(req.body, e);
       res.status(400).send(e);
       return;
     }

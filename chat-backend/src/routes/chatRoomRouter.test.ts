@@ -48,7 +48,6 @@ describe("chatRoomRouter", async () => {
     const { app, baseURL } = getTestServer();
 
     const chatRooms: ChatRoomType[] = [];
-
     app.use("/", chatRoomRouterFactory(chatRooms));
 
     const res = await baseFetch(baseURL, {
@@ -71,5 +70,21 @@ describe("chatRoomRouter", async () => {
         name: "a chat room",
       },
     ]);
+  });
+
+  it("returns 400 when posting an invalid chatroom", async () => {
+    const { app, baseURL } = getTestServer();
+
+    const chatRooms: ChatRoomType[] = [];
+    app.use("/", chatRoomRouterFactory(chatRooms));
+
+    const res = await baseFetch(baseURL, {
+      method: "POST",
+      body: JSON.stringify({
+        "giaggi?": "giaggio!",
+      }),
+    });
+
+    expect(res.status).toEqual(400);
   });
 });
