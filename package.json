@@ -22,6 +22,7 @@
     "react-i18next": "^13.0.1"
   },
   "devDependencies": {
+    "@happy-dom/jest-environment": "^9.20.3",
     "@testing-library/react": "^14.0.0",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
