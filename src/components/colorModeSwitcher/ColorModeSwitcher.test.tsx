@@ -50,7 +50,7 @@ describe("ColorModeSwitcher", () => {
     ${"light"}
     ${"dark"}
   `(
-    "toggles color mode on click",
+    "toggles color mode on click when it's currently $colorMode",
     async ({ colorMode }: { colorMode: ColorMode }) => {
       const toggleColorMode = vi.fn();
 
