@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import { IncomingMessage, Server, ServerResponse } from "http";
+import { AddressInfo } from "net";
 
 export const startExpress = () => {
   const app = express();
@@ -10,15 +11,13 @@ export const startExpress = () => {
     server: Server<typeof IncomingMessage, typeof ServerResponse>;
     baseURL: URL;
   }>((resolve, reject) => {
-    const port = 12312;
+    const server = app
+      .listen(() => {
+        const port = (server.address() as AddressInfo).port;
 
-    const baseURL = new URL(`http://localhost:${port}`);
-
-    let server: Server<typeof IncomingMessage, typeof ServerResponse>;
-
-    // eslint-disable-next-line prefer-const
-    server = app
-      .listen(port, () => resolve({ app, port, server, baseURL }))
+        const baseURL = new URL(`http://localhost:${port}`);
+        return resolve({ app, port, server, baseURL });
+      })
       .on("error", (error) => {
         reject(error);
       });
