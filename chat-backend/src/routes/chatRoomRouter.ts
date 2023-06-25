@@ -32,11 +32,6 @@ export const chatRoomRouterFactory = (chatRooms: ChatRoomType[]) => {
       res.status(400).send(e);
       return;
     }
-    // if (!CreateChatRoomArgs.guard(data)) {
-    //   res.status(400).send({
-    //     error: "Invalid chatRoom",
-    //   });
-    // }
 
     chatRooms.push(data);
     res.status(200).send(data satisfies CreateChatRoomResultType);
