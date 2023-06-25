@@ -1,12 +1,8 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import React, { ReactNode } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./init-i18n.ts";
-
-export const AllTheProviders = ({ children }: { children: ReactNode }) => {
-  return <ChakraProvider>{children}</ChakraProvider>;
-};
+import { AllTheProviders } from "./providers.tsx";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

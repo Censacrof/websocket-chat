@@ -1,6 +1,6 @@
 import { render, RenderOptions } from "@testing-library/react";
 import { ReactElement } from "react";
-import { AllTheProviders } from "./main";
+import { AllTheProviders } from "./providers";
 
 export const renderWithProviders = (
   ui: ReactElement,
