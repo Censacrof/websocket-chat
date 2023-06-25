@@ -1,10 +1,24 @@
-import { ChatRoomType } from "../model/chatRoom";
+import { ChatRoom, ChatRoomType } from "../model/chatRoom";
 import { getTestServer } from "../setupTestServer";
 import {
+  CreateChatRoomArgsType,
   GetChatRoomResult,
   GetChatRoomResultType,
   chatRoomRouterFactory,
 } from "./chatRoomRouter";
+
+const baseFetch = (
+  input: URL | RequestInfo,
+  init?: RequestInit | undefined
+) => {
+  return fetch(input, {
+    ...init,
+    headers: {
+      "Content-type": "application/json",
+      ...init?.headers,
+    },
+  });
+};
 
 describe("chatRoomRouter", async () => {
   it("returns the list of available chatRooms", async () => {
@@ -21,9 +35,41 @@ describe("chatRoomRouter", async () => {
 
     app.use("/", chatRoomRouterFactory(chatRooms));
 
-    const res = await fetch(baseURL);
+    const res = await baseFetch(baseURL);
+
+    expect(res.status).toEqual(200);
+
     const data = GetChatRoomResult.check(await res.json());
 
     expect(data).toEqual({ chatRooms } satisfies GetChatRoomResultType);
+  });
+
+  it("creates a new chatroom", async () => {
+    const { app, baseURL } = getTestServer();
+
+    const chatRooms: ChatRoomType[] = [];
+
+    app.use("/", chatRoomRouterFactory(chatRooms));
+
+    const res = await baseFetch(baseURL, {
+      method: "POST",
+      body: JSON.stringify({
+        name: "a chat room",
+      } satisfies CreateChatRoomArgsType),
+    });
+
+    expect(res.status).toEqual(200);
+
+    const data = ChatRoom.check(await res.json());
+
+    expect(data).toEqual({
+      name: "a chat room",
+    } satisfies ChatRoomType);
+
+    expect(chatRooms).toEqual([
+      {
+        name: "a chat room",
+      },
+    ]);
   });
 });
