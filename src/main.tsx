@@ -2,6 +2,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import React, { ReactNode } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
+import "./init-i18n.ts";
 
 export const AllTheProviders = ({ children }: { children: ReactNode }) => {
   return <ChakraProvider>{children}</ChakraProvider>;
