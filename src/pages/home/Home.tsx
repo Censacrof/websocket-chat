@@ -13,8 +13,8 @@ export const Home: FC<HomeProps> = ({
   const { t } = useTranslation();
 
   return (
-    <Container>
-      <Flex>
+    <Container paddingY={4}>
+      <Flex justifyContent={"space-between"} alignItems={"center"}>
         <Heading>{t("Home.helloWorld")}</Heading>
         <_ColorModeSwitcher />
       </Flex>
