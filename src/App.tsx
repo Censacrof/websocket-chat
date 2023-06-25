@@ -1,11 +1,14 @@
-import { Heading } from "@chakra-ui/react";
+import { FC } from "react";
+import { Home } from "./pages/home/Home";
 
-function App() {
-  return (
-    <>
-      <Heading>Hello World!</Heading>
-    </>
-  );
+export interface AppProps {
+  _Home?: typeof Home;
 }
 
-export default App;
+export const App: FC<AppProps> = ({ _Home = Home }) => {
+  return (
+    <>
+      <_Home />
+    </>
+  );
+};
