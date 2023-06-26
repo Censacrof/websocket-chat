@@ -3,7 +3,7 @@ import { IncomingMessage, Server, ServerResponse } from "http";
 import { AddressInfo } from "net";
 
 export interface StartExpressOptions {
-  port: number;
+  port?: number;
 }
 
 export const startExpress = (options?: StartExpressOptions) => {
