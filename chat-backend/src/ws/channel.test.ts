@@ -1,11 +1,12 @@
 import { vi } from "vitest";
 import WebSocket from "ws";
+import { getTestChannel } from "../setupTestChannel";
 import { waitFor } from "../testUtils";
-import { channelUrl, startWsServer } from "./channel";
+import { channelUrl } from "./channel";
 
 describe("WS channel", () => {
-  it("it listens for connections", async () => {
-    await startWsServer();
+  it("listens for connections", async () => {
+    getTestChannel();
 
     const handleOpen = vi.fn();
 

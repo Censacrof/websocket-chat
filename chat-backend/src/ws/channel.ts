@@ -6,15 +6,29 @@ const path = "/channel";
 
 export const channelUrl = new URL(path, `ws://localhost:${port}`);
 
-export const startWsServer = () =>
-  new Promise<WebSocket.Server<typeof WebSocket, typeof IncomingMessage>>(
-    (resolve, reject) => {
-      const wss = new WebSocketServer({
-        port: 4000,
-        path: "/channel",
-      });
+type Wss = WebSocket.Server<typeof WebSocket, typeof IncomingMessage>;
 
-      wss.on("listening", () => resolve(wss));
-      wss.on("error", reject);
-    }
-  );
+export const startChannel = () =>
+  new Promise<Wss>((resolve, reject) => {
+    const wss = new WebSocketServer({
+      port: 4000,
+      path: "/channel",
+    });
+
+    wss.on("listening", () => resolve(wss));
+    wss.on("error", reject);
+
+    wss.on("connection", (ws) => {
+      ws.close();
+    });
+  });
+
+export const stopChannel = (wss: Wss) =>
+  new Promise<void>((resolve, reject) => {
+    wss.on("error", reject);
+
+    wss.close(() => {
+      console.log("CLOSE");
+      resolve();
+    });
+  });
