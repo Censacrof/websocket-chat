@@ -42,7 +42,9 @@ export const waitForWsEvent = (
     | "upgrade"
     | "unexpected-response"
 ) => {
-  return new Promise<void>((resolve) => {
-    ws.on(event, () => resolve());
+  return new Promise<[...unknown[]]>((resolve) => {
+    ws.on(event, (_, ...args: unknown[]) => {
+      resolve(args);
+    });
   });
 };
