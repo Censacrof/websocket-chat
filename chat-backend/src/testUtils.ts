@@ -1,3 +1,5 @@
+import WebSocket from "ws";
+
 export const waitFor = (
   callback: () => void | Promise<void>,
   options?: {
@@ -25,5 +27,22 @@ export const waitFor = (
     };
 
     let retry = setTimeout(retryFn, retryMs);
+  });
+};
+
+export const waitForWsEvent = (
+  ws: WebSocket,
+  event:
+    | "close"
+    | "open"
+    | "error"
+    | "message"
+    | "ping"
+    | "pong"
+    | "upgrade"
+    | "unexpected-response"
+) => {
+  return new Promise<void>((resolve) => {
+    ws.on(event, () => resolve());
   });
 };
