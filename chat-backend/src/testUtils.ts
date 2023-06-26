@@ -1,5 +1,5 @@
 export const waitFor = (
-  callback: () => void | Promise<unknown>,
+  callback: () => void | Promise<void>,
   options?: {
     timeout?: number;
     retryInterval?: number;
