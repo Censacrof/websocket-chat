@@ -1,14 +1,18 @@
 import { startChannel, stopChannel } from "./ws/channel";
 
-let testChannel = await startChannel();
+const startChannelOptions = {
+  port: 0,
+};
+
+let testChannel = await startChannel(startChannelOptions);
 
 beforeEach(async () => {
-  await stopChannel(testChannel);
-  testChannel = await startChannel();
+  await stopChannel(testChannel.wss);
+  testChannel = await startChannel(startChannelOptions);
 });
 
 afterAll(async () => {
-  await stopChannel(testChannel);
+  await stopChannel(testChannel.wss);
 });
 
 export const getTestChannel = () => testChannel;
