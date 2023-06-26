@@ -8,5 +8,6 @@ describe("WS channel", () => {
 
     const ws = new WebSocket(channelUrl);
     await waitForWsEvent(ws, "open");
+    ws.on("close", () => ws.close);
   });
 });

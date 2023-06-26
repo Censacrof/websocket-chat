@@ -23,18 +23,13 @@ export const startChannel = (options?: StartChannelOptions) =>
 
     wss.on("listening", () => resolve({ wss, channelUrl }));
     wss.on("error", reject);
-
-    wss.on("connection", (ws) => {
-      ws.close();
-    });
   });
 
 export const stopChannel = (wss: Wss) =>
-  new Promise<void>((resolve, reject) => {
-    wss.on("error", reject);
-
+  new Promise<void>((resolve) => {
     wss.close(() => {
-      console.log("CLOSE");
       resolve();
     });
+
+    wss.clients.forEach((ws) => ws.close());
   });
