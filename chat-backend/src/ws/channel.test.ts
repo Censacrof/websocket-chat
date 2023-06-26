@@ -1,7 +1,7 @@
 import { vi } from "vitest";
 import WebSocket from "ws";
 import { waitFor } from "../testUtils";
-import { startWsServer } from "./channel";
+import { channelUrl, startWsServer } from "./channel";
 
 describe("WS channel", () => {
   it("it listens for connections", async () => {
@@ -11,7 +11,7 @@ describe("WS channel", () => {
 
     expect(handleOpen).toHaveBeenCalledTimes(0);
 
-    const ws = new WebSocket(`ws://localhost:${4000}/channel`);
+    const ws = new WebSocket(channelUrl);
     ws.addEventListener("open", handleOpen);
 
     await waitFor(() => {
