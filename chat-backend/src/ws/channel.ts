@@ -2,7 +2,7 @@ import { IncomingMessage } from "http";
 import { AddressInfo } from "net";
 import WebSocket, { WebSocketServer } from "ws";
 
-type Wss = WebSocket.Server<typeof WebSocket, typeof IncomingMessage>;
+export type Wss = WebSocket.Server<typeof WebSocket, typeof IncomingMessage>;
 
 export interface StartChannelOptions {
   port?: number;
