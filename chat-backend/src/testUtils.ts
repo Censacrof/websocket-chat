@@ -43,8 +43,13 @@ export const waitForWsEvent = (
     | "unexpected-response"
 ) => {
   return new Promise<[...unknown[]]>((resolve) => {
-    ws.on(event, (_, ...args: unknown[]) => {
+    ws.on(event, (...args: unknown[]) => {
       resolve(args);
     });
   });
+};
+
+export const waitForWsMessage = async (ws: WebSocket) => {
+  const [bufffer] = await waitForWsEvent(ws, "message");
+  return (bufffer as Buffer).toString();
 };
