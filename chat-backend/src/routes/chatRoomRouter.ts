@@ -1,6 +1,6 @@
 import express from "express";
 import * as RT from "runtypes";
-import { ChatRoom, ChatRoomType } from "../model/chatRoom";
+import { ChatRoom } from "../model/chatRoom";
 
 export const GetChatRoomResult = RT.Record({
   chatRooms: RT.Array(ChatRoom),
@@ -12,7 +12,7 @@ export type CreateChatRoomResultType = RT.Static<typeof CreateChatRoomResult>;
 export const CreateChatRoomArgs = ChatRoom;
 export type CreateChatRoomArgsType = RT.Static<typeof CreateChatRoomArgs>;
 
-export const chatRoomRouterFactory = (chatRooms: ChatRoomType[]) => {
+export const chatRoomRouterFactory = (chatRooms: ChatRoom[]) => {
   const router = express.Router();
   router.use(express.json());
 

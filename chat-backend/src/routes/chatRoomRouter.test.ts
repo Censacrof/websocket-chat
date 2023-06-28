@@ -1,4 +1,4 @@
-import { ChatRoom, ChatRoomType } from "../model/chatRoom";
+import { ChatRoom } from "../model/chatRoom";
 import { getTestServer } from "../setupTestServer";
 import {
   CreateChatRoomArgsType,
@@ -24,7 +24,7 @@ describe("chatRoomRouter", async () => {
   it("returns the list of available chatRooms", async () => {
     const { app, baseURL } = getTestServer();
 
-    const chatRooms: ChatRoomType[] = [
+    const chatRooms: ChatRoom[] = [
       {
         name: "A chat room",
       },
@@ -47,7 +47,7 @@ describe("chatRoomRouter", async () => {
   it("creates a new chatroom", async () => {
     const { app, baseURL } = getTestServer();
 
-    const chatRooms: ChatRoomType[] = [];
+    const chatRooms: ChatRoom[] = [];
     app.use("/", chatRoomRouterFactory(chatRooms));
 
     const res = await baseFetch(baseURL, {
@@ -63,7 +63,7 @@ describe("chatRoomRouter", async () => {
 
     expect(data).toEqual({
       name: "a chat room",
-    } satisfies ChatRoomType);
+    } satisfies ChatRoom);
 
     expect(chatRooms).toEqual([
       {
@@ -75,7 +75,7 @@ describe("chatRoomRouter", async () => {
   it("returns 400 when posting an invalid chatroom", async () => {
     const { app, baseURL } = getTestServer();
 
-    const chatRooms: ChatRoomType[] = [];
+    const chatRooms: ChatRoom[] = [];
     app.use("/", chatRoomRouterFactory(chatRooms));
 
     const res = await baseFetch(baseURL, {
