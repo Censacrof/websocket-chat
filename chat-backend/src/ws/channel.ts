@@ -4,12 +4,7 @@ import WebSocket, { WebSocketServer } from "ws";
 
 export type Wss = WebSocket.Server<typeof WebSocket, typeof IncomingMessage>;
 
-export interface StartChannelOptions {
-  port?: number;
-  path?: string;
-}
-
-export const startChannel = (options?: StartChannelOptions) =>
+export const startChannel = (options?: { port?: number; path?: string }) =>
   new Promise<{ wss: Wss; channelUrl: URL }>((resolve, reject) => {
     const wss = new WebSocketServer({
       port: options?.port || 0,
