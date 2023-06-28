@@ -6,13 +6,13 @@ export const ErrorResponse = RT.Record({
   message: RT.Optional(RT.String),
   data: RT.Optional(RT.Unknown),
 });
-export type ErrorResponseType = RT.Static<typeof ErrorResponse>;
+export type ErrorResponse = RT.Static<typeof ErrorResponse>;
 
 export const OkResponse = RT.Record({
   status: RT.Literal("ok"),
   data: RT.Optional(RT.Unknown),
 });
-export type OkResponseType = RT.Static<typeof OkResponse>;
+export type OkResponse = RT.Static<typeof OkResponse>;
 
 export const Response = RT.Union(OkResponse, ErrorResponse);
-export type ResponseType = RT.Static<typeof Response>;
+export type Response = RT.Static<typeof Response>;

@@ -4,4 +4,4 @@ export const ChatRoom = RT.Record({
   name: RT.String,
 });
 
-export type ChatRoomType = RT.Static<typeof ChatRoom>;
+export type ChatRoom = RT.Static<typeof ChatRoom>;
