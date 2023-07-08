@@ -27,9 +27,11 @@ describe("chatRoomRouter", async () => {
     const chatRooms: ChatRoom[] = [
       {
         name: "A chat room",
+        messages: [],
       },
       {
         name: "Another chat room",
+        messages: [],
       },
     ];
 
@@ -54,6 +56,7 @@ describe("chatRoomRouter", async () => {
       method: "POST",
       body: JSON.stringify({
         name: "a chat room",
+        messages: [],
       } satisfies CreateChatRoomArgsType),
     });
 
@@ -63,12 +66,14 @@ describe("chatRoomRouter", async () => {
 
     expect(data).toEqual({
       name: "a chat room",
+      messages: [],
     } satisfies ChatRoom);
 
     expect(chatRooms).toEqual([
       {
         name: "a chat room",
-      },
+        messages: [],
+      } satisfies ChatRoom,
     ]);
   });
 
